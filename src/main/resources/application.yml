@@ -1,0 +1,52 @@
+server:
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID
+
+spring:
+  session:
+    #spring-session-data-redis의 @EnableRedisHttpSession 어노테이션을 활성화하는 설정입니다.
+    #해당 어노테이션을 활성화함으로써, springSessionRepositoryFilter라는 이름의 Filter 인터페이스를 구현한 빈을 생성합니다.
+    #그리고 SpringSessionRepositoryFilter의 SessionRepository의 구현체로 RedisSessionRepository가 지정됩니다.
+    #이를 통해 Redis로 Session 저장소를 간편하게 구성할 수 있습니다.
+    store-type: redis
+    redis:
+      #redis.namespace의 설정은 세션 저장 시 prefix를 지정하는 설정입니다.
+      #기본값은 spring:session인데, 서비스 이름으로 변경해주었습니다.
+      namespace: studyany:session
+  #위의 설정을 통해 RedisSessionRepository를 구현체로 가진 SpringSessionRepositoryFilter 빈이 생성되었습니다.
+  #이때, Redis 연결과 관련한 설정 클래스인 RedisConnectionFactory를 설정해줘야 설정이 마무리됩니다
+  data:
+    redis:
+      host: localhost
+#      password: 0911
+      port: 6379
+
+#springdoc:
+#  version: '@springdoc.version@'
+#  api-docs:
+#    path: /api-docs
+#    groups:
+#      enabled: true
+#  swagger-ui:
+#    path: /index.html
+#    enabled: true
+#    display-request-duration: true
+#    tags-sorter: alpha
+#    groups-order: ASC
+#    operationsSorter: alpha
+#    doc-expansion: none
+#      disable-swagger-default-url: true
+#  show-actuator: true
+#  group-configs:
+#  - group: stores
+#    paths-to-match: /user/**
+#  - group: users
+#    packages-to-scan: com.example.studyany
+#  cache:
+#    disabled: true
+#  override-with-generic-response: false
+#  model-and-view-allowed: true
+#  default-produces-media-type: application/json
+#  default-consumes-media-type: application/json

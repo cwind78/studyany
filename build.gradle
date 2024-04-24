@@ -1,0 +1,48 @@
+plugins {
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '3.2.5'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.mapstruct:mapstruct:1.5.3.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    // Spring Boot Starter Web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // Redis 클라이언트
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    // Spring Session Data Redis(db가 redis가 아니라도 어플리케이션의 코드를 변경할 필요가 없어진다.
+    implementation 'org.springframework.session:spring-session-data-redis'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //스웨거는 아래만 추가하면 java config, application.yml에 설정한줄 없이 localhost:port/swagger-ui/index.html로 바로 확인 가능다.
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
